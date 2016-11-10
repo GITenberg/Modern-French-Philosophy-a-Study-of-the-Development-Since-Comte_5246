@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: v3jWFwuGXsxPoacldCsdgEnoGklXJaXR+BMn6mYUC4Te/5MgDQcjomOz3IHGQxuTUorljMvZnEzq8jmwe6/rRtLi393pifBXfe/Fa3rnXr7TsXJ6kM6h0sAkxx1KQdCMnu6c0vwOjz1x+X7B+JpPNqBtIHnStYW/UTrI422osgeiK5tXCepEc1Bu0sY/9juWoJYUuVAeQ7tNFi/0LNhThW7Lwosy7NXXs8ShMH0yzmXT8t4yc/ZVFK6DT/DX7gpzWL/4rBuyvghGAvMybhQDm6jRd3ETPwXklpwzUNf1vKukjoG2hHcLp5sQ3mEpkz7w3LwUiKXhIBEC/ofWeuxw5WtQmyv+rCZaC+JD+Npl0lEZTD7R4nhlfdI7RoNxPHAh97FL8Q1cGX1RO9Z6K7pemJvkLftA52W+ZuNIE600kHxgPKaogU9X/7PL1Mq6Kk/y01xrw/FyW/ayA5C1H5lPSvee8hEbgPY8QoIrv+u3tmteGbHaH9PtrbCY7BQqz6axdgq4LjLIKIlKGdPDWloIMXgGtCdYiX+NEwAeWiGwXW18LuLBIuFqh9awkc8gAqrZvSJL5XcUQkifa4ezEDOcjBiaOKTkMDEUp1bQkmWgzvdRcudi1bMA4lzYDd9838s1/DeFZiJpmmQdVhnUPAIkmL3e21H66yHAyKlPc/LckiQ=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Modern-French-Philosophy-a-Study-of-the-Development-Since-Comte_5246
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
