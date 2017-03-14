@@ -1,5 +1,8 @@
 _repo: Modern-French-Philosophy-a-Study-of-the-Development-Since-Comte_5246
-_version: 0.1.0
+_version: 0.2.0
+covers:
+- cover_type: generated
+  image_path: cover.png
 creator:
   author:
     agent_name: Gunn, John Alexander
@@ -9,6 +12,8 @@ creator:
     url: http://www.gutenberg.org/2009/agents/1746
 description: '"Comparative table : The chief philosophical woeks in France, Germany,
   England and America from 1851 to 1921." : [341] -- [347].'
+edition_identifiers:
+  edition_id: http://www.gutenberg.org/ebooks/5246#Modern-French-Philosophy-a-Study-of-the-Development-Since-Comte
 gutenberg_bookshelf: Philosophy
 gutenberg_issued: '2004-03-01'
 gutenberg_type: Text
