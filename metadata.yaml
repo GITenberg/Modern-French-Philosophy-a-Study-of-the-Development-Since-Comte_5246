@@ -1,5 +1,5 @@
 _repo: Modern-French-Philosophy-a-Study-of-the-Development-Since-Comte_5246
-_version: 0.2.0
+_version: 0.2.1
 covers:
 - cover_type: generated
   image_path: cover.png
@@ -27,5 +27,6 @@ subjects:
 - !lcsh 'Philosophy, Modern'
 - !lcsh 'Philosophy, French'
 - !lcc 'B'
+- GITenberg
 title: 'Modern French Philosophy: a Study of the Development Since Comte'
 url: http://www.gutenberg.org/ebooks/5246
